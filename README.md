@@ -331,6 +331,6 @@ This project was inspired by the growing mental health challenges faced by stude
 
 **Made with ❤️ for student mental wellness**
 
-[🌐 Website]([https://mindcare.app](https://mindcare.deno.dev/login)) • [📧 Contact](mailto:support@mindcare.app)
+[🌐 Website](https://mindcare.deno.dev/login) • [📧 Contact](mailto:support@mindcare.app)
 
 </div>
