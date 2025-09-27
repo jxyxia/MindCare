@@ -9,65 +9,33 @@ const sounds: Sound[] = [
     id: '1',
     title: 'Ocean Waves',
     category: 'nature',
-    url: 'https://open.spotify.com/track/1PZoHdDM71mzOFW1T6H03y?si=1d97c8e19d6b4eba',
+    url: '/sounds/Ocean Waves.mp3',
     duration: 300,
     description: 'Gentle ocean waves for relaxation and focus',
   },
   {
     id: '2',
-    title: 'Rain on Leaves',
-    category: 'nature',
-    url: 'https://www.soundjay.com/nature/sounds-rain-1.mp3',
-    duration: 600,
-    description: 'Soft rainfall sounds for deep relaxation',
-  },
-  {
-    id: '3',
     title: 'Forest Birds',
     category: 'nature',
-    url: 'https://www.soundjay.com/nature/sounds-birds-1.mp3',
+    url: '/sounds/Forest Birds.mp3',
     duration: 480,
     description: 'Peaceful bird songs from a serene forest',
   },
   {
-    id: '4',
-    title: 'White Noise',
-    category: 'white-noise',
-    url: 'https://www.soundjay.com/misc/sounds-white-noise-1.mp3',
-    duration: 1800,
-    description: 'Classic white noise for concentration',
-  },
-  {
-    id: '5',
+    id: '3',
     title: 'Pink Noise',
     category: 'white-noise',
-    url: 'https://www.soundjay.com/misc/sounds-pink-noise-1.mp3',
+    url: '/sounds/Pink Noise.mp3',
     duration: 1800,
     description: 'Balanced pink noise for better sleep',
   },
   {
-    id: '6',
-    title: 'Focus Binaural',
+    id: '4',
+    title: 'Relaxation Binaurals',
     category: 'binaural',
-    url: 'https://www.soundjay.com/misc/sounds-binaural-1.mp3',
-    duration: 900,
-    description: '40Hz binaural beats for enhanced focus',
-  },
-  {
-    id: '7',
-    title: 'Relaxation Binaural',
-    category: 'binaural',
-    url: 'https://www.soundjay.com/misc/sounds-binaural-2.mp3',
+    url: '/sounds/Relaxation Binaurals.mp3',
     duration: 1200,
     description: '10Hz alpha waves for deep relaxation',
-  },
-  {
-    id: '8',
-    title: 'Guided Body Scan',
-    category: 'meditation',
-    url: 'https://www.soundjay.com/meditation/sounds-meditation-1.mp3',
-    duration: 900,
-    description: 'Gentle guided meditation for body awareness',
   },
 ];
 
@@ -89,6 +57,7 @@ export default function Sounds() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [currentSound, setCurrentSound] = useState<Sound | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [favorites, setFavorites] = useState<string[]>(['1', '3']);
 
   const categories = ['all', 'nature', 'white-noise', 'binaural', 'meditation'];
@@ -109,7 +78,15 @@ export default function Sounds() {
   };
 
   const handlePlaySound = (sound: Sound) => {
-    setCurrentSound(currentSound?.id === sound.id ? null : sound);
+    if (currentSound?.id === sound.id && isPlaying) {
+      // If same sound is playing, pause it
+      setCurrentSound(null);
+      setIsPlaying(false);
+    } else {
+      // Play new sound or resume paused sound
+      setCurrentSound(sound);
+      setIsPlaying(true);
+    }
   };
 
   const handleNextSound = () => {
@@ -239,12 +216,12 @@ export default function Sounds() {
                     whileTap={{ scale: 0.95 }}
                     onClick={() => handlePlaySound(sound)}
                     className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
-                      currentSound?.id === sound.id
+                      currentSound?.id === sound.id && isPlaying
                         ? 'bg-emerald-500 text-white'
                         : 'bg-emerald-100 text-emerald-700 hover:bg-emerald-200'
                     }`}
                   >
-                    {currentSound?.id === sound.id ? (
+                    {currentSound?.id === sound.id && isPlaying ? (
                       <>
                         <Pause size={16} />
                         <span>Playing</span>

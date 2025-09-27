@@ -23,7 +23,6 @@ const navigationItems = [
   { path: '/sounds', label: 'Sounds', icon: Volume2 },
   { path: '/resources', label: 'Resources', icon: BookOpen },
   { path: '/community', label: 'Community', icon: Users },
-  { path: '/professional-support', label: 'Professional Support', icon: Shield },
   { path: '/emergency', label: 'Emergency', icon: Shield },
   { path: '/support', label: '24/7 Support', icon: Bot },
 ];

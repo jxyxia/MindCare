@@ -24,21 +24,41 @@ export default function AudioPlayer({ sound, onNext, onPrevious }: AudioPlayerPr
     const audio = audioRef.current;
     if (!audio) return;
 
+    // Set CORS mode for local files
+    audio.crossOrigin = 'anonymous';
+
     const handleTimeUpdate = () => setCurrentTime(audio.currentTime);
-    const handleLoadedData = () => setDuration(audio.duration);
+    const handleLoadedData = () => {
+      if (audio.duration && !isNaN(audio.duration) && isFinite(audio.duration)) {
+        setDuration(audio.duration);
+      }
+    };
+    const handleLoadedMetadata = () => {
+      if (audio.duration && !isNaN(audio.duration) && isFinite(audio.duration)) {
+        setDuration(audio.duration);
+      }
+    };
     const handleEnded = () => {
       setIsPlaying(false);
       if (onNext) onNext();
     };
+    const handleError = (e: Event) => {
+      console.error('Audio loading error:', e);
+      setIsPlaying(false);
+    };
 
     audio.addEventListener('timeupdate', handleTimeUpdate);
     audio.addEventListener('loadeddata', handleLoadedData);
+    audio.addEventListener('loadedmetadata', handleLoadedMetadata);
     audio.addEventListener('ended', handleEnded);
+    audio.addEventListener('error', handleError);
 
     return () => {
       audio.removeEventListener('timeupdate', handleTimeUpdate);
       audio.removeEventListener('loadeddata', handleLoadedData);
+      audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
       audio.removeEventListener('ended', handleEnded);
+      audio.removeEventListener('error', handleError);
     };
   }, [onNext]);
 
@@ -67,9 +87,18 @@ export default function AudioPlayer({ sound, onNext, onPrevious }: AudioPlayerPr
 
   const handlePlay = () => {
     if (audioRef.current) {
-      audioRef.current.play();
-      setIsPlaying(true);
-      dispatch({ type: 'SET_CURRENT_SOUND', payload: sound });
+      const playPromise = audioRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setIsPlaying(true);
+            dispatch({ type: 'SET_CURRENT_SOUND', payload: sound });
+          })
+          .catch((error) => {
+            console.error('Error playing audio:', error);
+            setIsPlaying(false);
+          });
+      }
     }
   };
 

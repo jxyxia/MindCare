@@ -13,7 +13,6 @@ import AISupport from './pages/AISupport';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword';
-import ProfessionalSupportPage from './pages/ProfessionalSupportPage';
 
 function App() {
   return (
@@ -38,7 +37,6 @@ function App() {
                     <Route path="/sounds" element={<Sounds />} />
                     <Route path="/resources" element={<Resources />} />
                     <Route path="/community" element={<Community />} />
-                    <Route path="/professional-support" element={<ProfessionalSupportPage />} />
                     <Route path="/emergency" element={<Emergency />} />
                     <Route path="/support" element={<AISupport />} />
                     <Route path="*" element={<Navigate to="/" replace />} />

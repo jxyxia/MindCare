@@ -5,8 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useApp } from '../contexts/AppContext';
 import MoodTracker from '../components/MoodTracker';
 import WeatherWidget from '../components/WeatherWidget';
-import ProfessionalSupport from '../components/ProfessionalSupport';
-import SessionTracker from '../components/SessionTracker';
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
@@ -265,25 +263,6 @@ const Dashboard: React.FC = () => {
                   </motion.button>
                 ))}
               </div>
-            </motion.div>
-
-            {/* Professional Support */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm"
-            >
-              <ProfessionalSupport />
-            </motion.div>
-
-            {/* Session Tracker */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-            >
-              <SessionTracker />
             </motion.div>
           </div>
 
