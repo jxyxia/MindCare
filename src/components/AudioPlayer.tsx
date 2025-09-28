@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Play, Pause, SkipBack, SkipForward, Volume2, Clock } from 'lucide-react';
 import { Sound } from '../types';
@@ -19,6 +19,7 @@ export default function AudioPlayer({ sound, onNext, onPrevious }: AudioPlayerPr
   const [showTimer, setShowTimer] = useState(false);
   const [timer, setTimer] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const timerIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -68,10 +69,16 @@ export default function AudioPlayer({ sound, onNext, onPrevious }: AudioPlayerPr
     }
   }, [volume]);
 
+  const handlePause = useCallback(() => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    }
+  }, []);
+
   useEffect(() => {
-    let interval: NodeJS.Timeout;
     if (showTimer && timer > 0 && isPlaying) {
-      interval = setInterval(() => {
+      timerIntervalRef.current = setInterval(() => {
         setTimer(prev => {
           if (prev <= 1) {
             handlePause();
@@ -82,7 +89,12 @@ export default function AudioPlayer({ sound, onNext, onPrevious }: AudioPlayerPr
         });
       }, 1000);
     }
-    return () => clearInterval(interval);
+    return () => {
+      if (timerIntervalRef.current) {
+        clearInterval(timerIntervalRef.current);
+        timerIntervalRef.current = null;
+      }
+    };
   }, [showTimer, timer, isPlaying]);
 
   const handlePlay = () => {
@@ -99,13 +111,6 @@ export default function AudioPlayer({ sound, onNext, onPrevious }: AudioPlayerPr
             setIsPlaying(false);
           });
       }
-    }
-  };
-
-  const handlePause = () => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-      setIsPlaying(false);
     }
   };
 

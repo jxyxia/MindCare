@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Play, Pause, RotateCcw, X } from 'lucide-react';
 
@@ -21,12 +21,11 @@ export default function BreathingGame({ onClose }: BreathingGameProps) {
   const [timeLeft, setTimeLeft] = useState(4);
   const [cycleCount, setCycleCount] = useState(0);
   const [totalCycles, setTotalCycles] = useState(4);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
-
     if (isPlaying && timeLeft > 0) {
-      interval = setInterval(() => {
+      intervalRef.current = setInterval(() => {
         setTimeLeft(prev => prev - 1);
       }, 1000);
     } else if (isPlaying && timeLeft === 0) {
@@ -52,7 +51,12 @@ export default function BreathingGame({ onClose }: BreathingGameProps) {
       }
     }
 
-    return () => clearInterval(interval);
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
   }, [isPlaying, timeLeft, currentPhase, cycleCount, totalCycles]);
 
   const handleStart = () => {
@@ -61,10 +65,18 @@ export default function BreathingGame({ onClose }: BreathingGameProps) {
 
   const handlePause = () => {
     setIsPlaying(false);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
   };
 
   const handleReset = () => {
     setIsPlaying(false);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
     setCurrentPhase('inhale');
     setTimeLeft(4);
     setCycleCount(0);
