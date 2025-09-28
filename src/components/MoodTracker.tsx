@@ -81,22 +81,22 @@ export default function MoodTracker() {
     const moodOption = moodOptions.find(m => m.id === savedMood.mood);
     
     return (
-      <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+      <div className="bg-gray-800 rounded-xl border border-gray-700 p-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Mood Status */}
           <div className="text-center py-6">
             <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
               <CheckCircle className="w-6 h-6 text-green-600" />
             </div>
-            <h2 className="text-lg font-semibold text-slate-800 mb-2">Mood logged for today!</h2>
+            <h2 className="text-lg font-semibold text-gray-100 mb-2">Mood logged for today!</h2>
             <div className="text-3xl mb-2">{moodOption?.emoji}</div>
-            <p className="text-slate-600 mb-3">You're feeling: {moodOption?.label}</p>
+            <p className="text-gray-300 mb-3">You're feeling: {moodOption?.label}</p>
             {savedMood.note && (
-              <div className="bg-slate-50 rounded-xl p-3 max-w-sm mx-auto">
-                <p className="text-slate-700 italic text-sm">"{savedMood.note}"</p>
+              <div className="bg-gray-700 rounded-xl p-3 max-w-sm mx-auto">
+                <p className="text-gray-200 italic text-sm">"{savedMood.note}"</p>
               </div>
             )}
-            <p className="text-slate-500 text-xs mt-3">Come back tomorrow to log your mood again!</p>
+            <p className="text-gray-400 text-xs mt-3">Come back tomorrow to log your mood again!</p>
           </div>
           
           {/* Mood Calendar */}
@@ -109,97 +109,96 @@ export default function MoodTracker() {
   }
 
   return (
-    <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
-      {showSuccess ? (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="text-center py-8"
-        >
-          <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-            <CheckCircle className="w-6 h-6 text-green-600" />
-          </div>
-          <h3 className="text-lg font-semibold text-slate-800 mb-2">Mood saved!</h3>
-          <p className="text-slate-600">Thank you for checking in with yourself today.</p>
-        </motion.div>
-      ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Mood Selection */}
-          <div>
-            <div className="mb-4">
-              <h2 className="text-lg font-semibold text-slate-800 mb-1">How are you feeling today?</h2>
-              <p className="text-slate-600 text-sm">Take a moment to check in with yourself</p>
+    <div className="bg-gray-800 rounded-xl border border-gray-700 p-6">
+      <h2 className="text-xl font-semibold text-gray-100 mb-4">Track Your Mood</h2>
+      
+      {/* Compact Calendar */}
+      <div className="mb-6">
+        <div className="grid grid-cols-7 gap-1 mb-2">
+          {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(day => (
+            <div key={day} className="text-center text-gray-400 text-sm p-2">
+              {day}
             </div>
-
-            {/* Compact Mood Grid */}
-            <div className="grid grid-cols-5 gap-2 mb-4">
-              {moodOptions.map((mood) => {
-                const isSelected = selectedMood === mood.id;
-                
-                return (
-                  <motion.button
-                    key={mood.id}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => handleMoodSelect(mood.id)}
-                    className={`
-                      p-2 rounded-xl border-2 transition-all duration-200 text-center
-                      ${isSelected 
-                        ? 'border-blue-300 bg-blue-50 shadow-md' 
-                        : 'border-slate-200 hover:border-slate-300 hover:shadow-sm'
-                      }
-                    `}
-                  >
-                    <div className="text-xl mb-1">{mood.emoji}</div>
-                    <div className={`text-xs font-medium ${isSelected ? 'text-blue-700' : 'text-slate-700'}`}>
-                      {mood.label}
-                    </div>
-                  </motion.button>
-                );
-              })}
-            </div>
-
-            {/* Expanded Note Section */}
-            {isExpanded && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="space-y-3"
-              >
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
-                    What's on your mind? (optional)
-                  </label>
-                  <textarea
-                    value={note}
-                    onChange={(e) => setNote(e.target.value)}
-                    placeholder="Share what's contributing to how you're feeling..."
-                    className="w-full p-2 border border-slate-200 rounded-xl resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-                    rows={2}
-                  />
-                </div>
-
-                <div className="flex justify-end">
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={handleSaveMood}
-                    disabled={isSaving}
-                    className="bg-blue-500 text-white py-2 px-4 rounded-xl font-medium hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 text-sm"
-                  >
-                    {isSaving ? 'Saving...' : 'Save My Mood'}
-                  </motion.button>
-                </div>
-              </motion.div>
-            )}
-          </div>
-
-          {/* Mood Calendar */}
-          <div>
-            <MoodCalendar moodEntries={getMoodEntries()} />
-          </div>
+          ))}
         </div>
-      )}
+        <div className="grid grid-cols-7 gap-1">
+          {Array.from({ length: 31 }, (_, i) => (
+            <div key={i} className="aspect-square p-1">
+              <button
+                className={`w-full h-full rounded-lg flex items-center justify-center text-sm
+                  ${i + 1 === new Date().getDate() 
+                    ? 'bg-blue-600 text-gray-100' 
+                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                  }
+                `}
+              >
+                {i + 1}
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Mood Selection */}
+      <div className="mb-6">
+        <div className="grid grid-cols-5 gap-2">
+          {moodOptions.map((mood) => (
+            <button
+              key={mood.label}
+              onClick={() => setSelectedMood(mood)}
+              className={`p-4 rounded-lg flex flex-col items-center ${
+                selectedMood?.label === mood.label
+                  ? 'bg-blue-600 text-gray-100'
+                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+              }`}
+            >
+              <span className="text-2xl mb-2">{mood.emoji}</span>
+              <span className="text-sm">{mood.label}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Notes Input */}
+      <textarea
+        value={note}
+        onChange={(e) => setNote(e.target.value)}
+        placeholder="Add notes about your mood (optional)"
+        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg 
+          focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none 
+          text-gray-100 placeholder-gray-400 mb-4"
+        rows={3}
+      />
+
+      {/* Submit Button */}
+      <motion.button
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        onClick={handleSaveMood}
+        disabled={isSaving}
+        className="w-full py-3 bg-blue-600 text-gray-100 rounded-lg hover:bg-blue-700 
+          transition-colors font-medium"
+      >
+        {isSaving ? 'Saving...' : 'Log Mood'}
+      </motion.button>
+
+      {/* Recent Moods - Compact View */}
+      <div className="mt-6">
+        <h3 className="text-lg font-medium text-gray-100 mb-3">Recent</h3>
+        <div className="flex flex-wrap gap-2">
+          {getMoodEntries().slice(0, 5).map((entry) => (
+            <div
+              key={entry.timestamp}
+              className="p-2 bg-gray-700 rounded-lg text-center"
+            >
+              <span className="text-xl block mb-1">{entry.mood.emoji}</span>
+              <span className="text-xs text-gray-400 block">
+                {new Date(entry.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

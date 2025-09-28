@@ -239,48 +239,48 @@ export default function AISupport() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 pt-20 pb-8">
+    <div className="min-h-screen bg-gray-900 pt-20 pb-8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header Section */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-8 bg-gradient-to-r from-blue-50 to-green-50 rounded-2xl p-8 border border-blue-100"
+          className="mb-8 bg-gray-800 rounded-2xl p-8 border border-gray-700"
         >
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center">
-                <Bot className="text-white" size={24} />
+              <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
+                <Bot className="text-gray-100" size={24} />
               </div>
               <div>
-                <h1 className="text-3xl font-semibold text-slate-800">AI Support Assistant</h1>
-                <p className="text-slate-600">Your 24/7 Mental Wellness Companion</p>
+                <h1 className="text-3xl font-semibold text-gray-100">AI Support Assistant</h1>
+                <p className="text-gray-400">Your 24/7 Mental Wellness Companion</p>
               </div>
             </div>
-            <div className="flex items-center space-x-2 text-emerald-600">
+            <div className="flex items-center space-x-2 text-emerald-400">
               <div className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse"></div>
               <span className="font-medium">Always Online</span>
             </div>
           </div>
-          <p className="text-slate-700 italic text-lg">
+          <p className="text-gray-300 italic text-lg">
             "I'm here to listen and support you anytime you need."
           </p>
         </motion.div>
 
         {/* Chat Container */}
-        <div className="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
+        <div className="bg-gray-800 rounded-2xl shadow-lg border border-gray-700 overflow-hidden">
           
           {/* Chat Header */}
-          <div className="bg-slate-50 px-6 py-4 border-b border-slate-200">
+          <div className="bg-gray-800 px-6 py-4 border-b border-gray-700">
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-slate-800">Chat Session</h2>
+              <h2 className="text-lg font-semibold text-gray-100">Chat Session</h2>
               <div className="flex items-center space-x-2">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={exportChat}
-                  className="p-2 text-slate-500 hover:text-slate-700 rounded-lg hover:bg-slate-100 transition-colors"
+                  className="p-2 text-gray-400 hover:text-gray-200 rounded-lg hover:bg-gray-700 transition-colors"
                   title="Export Chat"
                 >
                   <Download size={18} />
@@ -289,7 +289,7 @@ export default function AISupport() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={clearChat}
-                  className="p-2 text-slate-500 hover:text-red-600 rounded-lg hover:bg-slate-100 transition-colors"
+                  className="p-2 text-gray-400 hover:text-red-400 rounded-lg hover:bg-gray-700 transition-colors"
                   title="Clear Chat"
                 >
                   <Trash2 size={18} />
@@ -299,7 +299,7 @@ export default function AISupport() {
           </div>
 
           {/* Messages Area */}
-          <div className="h-96 overflow-y-auto p-6 space-y-4">
+          <div className="h-96 overflow-y-auto p-6 space-y-4 bg-gray-800">
             <AnimatePresence>
               {messages.map((message) => (
                 <motion.div
@@ -311,12 +311,12 @@ export default function AISupport() {
                 >
                   <div className={`max-w-xs lg:max-w-md px-4 py-3 rounded-2xl ${
                     message.isUser
-                      ? 'bg-blue-500 text-white'
-                      : 'bg-slate-100 text-slate-800'
+                      ? 'bg-blue-600 text-gray-100'
+                      : 'bg-gray-700 text-gray-100'
                   }`}>
                     <p className="text-sm leading-relaxed">{message.text}</p>
                     <p className={`text-xs mt-2 ${
-                      message.isUser ? 'text-blue-100' : 'text-slate-500'
+                      message.isUser ? 'text-blue-200' : 'text-gray-400'
                     }`}>
                       {formatTime(message.timestamp)}
                     </p>
@@ -332,13 +332,13 @@ export default function AISupport() {
                 animate={{ opacity: 1, y: 0 }}
                 className="flex justify-start"
               >
-                <div className="bg-slate-100 text-slate-800 px-4 py-3 rounded-2xl max-w-xs">
+                <div className="bg-gray-700 text-gray-100 px-4 py-3 rounded-2xl max-w-xs">
                   <div className="flex items-center space-x-1">
                     <span className="text-sm">AI is typing</span>
                     <div className="flex space-x-1">
-                      <div className="w-1 h-1 bg-slate-500 rounded-full animate-bounce"></div>
-                      <div className="w-1 h-1 bg-slate-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                      <div className="w-1 h-1 bg-slate-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                      <div className="w-1 h-1 bg-gray-400 rounded-full animate-bounce"></div>
+                      <div className="w-1 h-1 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                      <div className="w-1 h-1 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                     </div>
                   </div>
                 </div>
@@ -348,8 +348,8 @@ export default function AISupport() {
           </div>
 
           {/* Quick Response Buttons */}
-          <div className="px-6 py-4 border-t border-slate-200 bg-slate-50">
-            <p className="text-sm text-slate-600 mb-3">Quick responses:</p>
+          <div className="px-6 py-4 border-t border-gray-700 bg-gray-800">
+            <p className="text-sm text-gray-400 mb-3">Quick responses:</p>
             <div className="flex flex-wrap gap-2">
               {quickResponses.map((response) => (
                 <motion.button
@@ -357,7 +357,7 @@ export default function AISupport() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => handleQuickResponse(response)}
-                  className="px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm text-slate-700 hover:bg-blue-50 hover:border-blue-200 transition-colors"
+                  className="px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-sm text-gray-200 hover:bg-gray-600 transition-colors"
                 >
                   {response}
                 </motion.button>
@@ -366,7 +366,7 @@ export default function AISupport() {
           </div>
 
           {/* Input Section */}
-          <div className="p-6 border-t border-slate-200">
+          <div className="p-6 border-t border-gray-700 bg-gray-800">
             <form onSubmit={handleSubmit} className="flex items-end space-x-4">
               <div className="flex-1">
                 <textarea
@@ -374,7 +374,7 @@ export default function AISupport() {
                   value={inputText}
                   onChange={(e) => setInputText(e.target.value)}
                   placeholder="Type your message here..."
-                  className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none text-gray-100 placeholder-gray-400"
                   rows={2}
                   maxLength={500}
                   onKeyDown={(e) => {
@@ -385,10 +385,10 @@ export default function AISupport() {
                   }}
                 />
                 <div className="flex items-center justify-between mt-2">
-                  <span className="text-xs text-slate-500">
+                  <span className="text-xs text-gray-400">
                     {inputText.length}/500 characters
                   </span>
-                  <span className="text-xs text-slate-500">
+                  <span className="text-xs text-gray-400">
                     Press Enter to send, Shift+Enter for new line
                   </span>
                 </div>
@@ -398,7 +398,7 @@ export default function AISupport() {
                 whileTap={{ scale: 0.95 }}
                 type="submit"
                 disabled={!inputText.trim() || isTyping}
-                className="p-3 bg-blue-500 text-white rounded-xl hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="p-3 bg-blue-600 text-gray-100 rounded-xl hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 <Send size={20} />
               </motion.button>

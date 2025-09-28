@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Dark mode base styles */
+@layer base {
+  body {
+    @apply bg-gray-900 text-gray-100;
+  }
+
+  h1 {
+    @apply text-gray-50 font-bold tracking-tight;
+  }
+
+  h2, h3, h4, h5, h6 {
+    @apply text-gray-100 font-semibold;
+  }
+
+  p {
+    @apply text-gray-300;
+  }
+}
+
+/* Component styles */
+@layer components {
+  .btn-primary {
+    @apply px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors;
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 transition-colors;
+  }
+
+  .card {
+    @apply bg-gray-800 rounded-xl border border-gray-700 p-6;
+  }
+
+  .input-dark {
+    @apply bg-gray-800 border-gray-700 text-gray-100 placeholder-gray-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent;
+  }
+}
+
+/* Utility classes */
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500;
+  }
+}
+
+/* Optimize animations */
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+}
+
+/* Reduce motion if user prefers */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Card and container backgrounds */
+.card, .container {
+  @apply bg-gray-800 border-gray-700;
+}
+
+/* Hover states */
+.hover-highlight:hover {
+  @apply bg-gray-700 text-gray-50;
+}
+
+/* Labels */
+label {
+  @apply text-gray-300;
+}
+
+/* Table elements */
+table {
+  @apply text-gray-300;
+}
+
+th {
+  @apply text-gray-200;
+}
+
+td {
+  @apply text-gray-300;
+}
+
+/* Code blocks */
+code {
+  @apply bg-gray-800 text-gray-200;
+}
+
+/* Blockquotes */
+blockquote {
+  @apply text-gray-300 border-l-4 border-gray-700;
+}
+
+/* Badge text */
+.badge {
+  @apply text-gray-200;
+}
+
+/* Active/Selected states */
+.active {
+  @apply text-gray-50 bg-gray-700;
+}
+
+/* Disabled states */
+.disabled {
+  @apply text-gray-500 cursor-not-allowed;
+}

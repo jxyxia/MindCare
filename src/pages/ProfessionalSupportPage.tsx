@@ -165,6 +165,12 @@ const mockTherapists: Therapist[] = [
   }
 ];
 
+const typeColors = {
+  campus: 'bg-blue-900 text-blue-100',
+  partner: 'bg-emerald-900 text-emerald-100',
+  online: 'bg-purple-900 text-purple-100',
+};
+
 export default function ProfessionalSupportPage() {
   const { state } = useApp();
   const [selectedType, setSelectedType] = useState<'campus' | 'partner' | 'online' | 'all'>('all');
@@ -232,7 +238,7 @@ export default function ProfessionalSupportPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 pt-20 pb-8">
+    <div className="min-h-screen bg-gray-900 pt-20 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -242,12 +248,12 @@ export default function ProfessionalSupportPage() {
           className="mb-8"
         >
           <div className="flex items-center space-x-3 mb-4">
-            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-              <Heart className="text-blue-600" size={24} />
+            <div className="w-12 h-12 bg-blue-900 rounded-full flex items-center justify-center">
+              <Heart className="text-blue-100" size={24} />
             </div>
-            <h1 className="text-3xl font-bold text-slate-800">Professional Support</h1>
+            <h1 className="text-3xl font-bold text-gray-100">Professional Support</h1>
           </div>
-          <p className="text-slate-600 max-w-2xl">
+          <p className="text-gray-400">
             Connect with qualified therapists, counselors, and mental health professionals. 
             Get the support you need through chat, call, or video sessions.
           </p>
@@ -258,15 +264,15 @@ export default function ProfessionalSupportPage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white rounded-xl shadow-sm border border-slate-200 p-6"
+            className="bg-gray-800 rounded-xl border border-gray-700 p-6"
           >
             <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                <Users className="text-blue-600" size={24} />
+              <div className="w-12 h-12 bg-blue-900 rounded-lg flex items-center justify-center">
+                <Users className="text-blue-100" size={24} />
               </div>
               <div>
-                <p className="text-2xl font-bold text-slate-800">{mockTherapists.length}</p>
-                <p className="text-sm text-slate-500">Available Therapists</p>
+                <p className="text-2xl font-bold text-gray-100">{mockTherapists.length}</p>
+                <p className="text-sm text-gray-400">Available Therapists</p>
               </div>
             </div>
           </motion.div>
@@ -275,15 +281,15 @@ export default function ProfessionalSupportPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="bg-white rounded-xl shadow-sm border border-slate-200 p-6"
+            className="bg-gray-800 rounded-xl border border-gray-700 p-6"
           >
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center">
                 <Calendar className="text-emerald-600" size={24} />
               </div>
               <div>
-                <p className="text-2xl font-bold text-slate-800">{sessions.length}</p>
-                <p className="text-sm text-slate-500">Total Sessions</p>
+                <p className="text-2xl font-bold text-gray-100">{sessions.length}</p>
+                <p className="text-sm text-gray-400">Total Sessions</p>
               </div>
             </div>
           </motion.div>
@@ -292,15 +298,15 @@ export default function ProfessionalSupportPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-white rounded-xl shadow-sm border border-slate-200 p-6"
+            className="bg-gray-800 rounded-xl border border-gray-700 p-6"
           >
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
                 <Clock className="text-purple-600" size={24} />
               </div>
               <div>
-                <p className="text-2xl font-bold text-slate-800">{upcomingSessions.length}</p>
-                <p className="text-sm text-slate-500">Upcoming Sessions</p>
+                <p className="text-2xl font-bold text-gray-100">{upcomingSessions.length}</p>
+                <p className="text-sm text-gray-400">Upcoming Sessions</p>
               </div>
             </div>
           </motion.div>
@@ -309,15 +315,15 @@ export default function ProfessionalSupportPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="bg-white rounded-xl shadow-sm border border-slate-200 p-6"
+            className="bg-gray-800 rounded-xl border border-gray-700 p-6"
           >
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
                 <Shield className="text-orange-600" size={24} />
               </div>
               <div>
-                <p className="text-2xl font-bold text-slate-800">24/7</p>
-                <p className="text-sm text-slate-500">Support Available</p>
+                <p className="text-2xl font-bold text-gray-100">24/7</p>
+                <p className="text-sm text-gray-400">Support Available</p>
               </div>
             </div>
           </motion.div>
@@ -327,22 +333,22 @@ export default function ProfessionalSupportPage() {
         <div className="mb-8 space-y-4">
           <div className="flex flex-col lg:flex-row gap-4">
             <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" size={20} />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
               <input
                 type="text"
                 placeholder="Search therapists by name or specialization..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full pl-10 pr-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-100"
               />
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
               <div className="flex items-center space-x-2">
-                <Filter size={20} className="text-slate-500" />
+                <Filter size={20} className="text-gray-400" />
                 <select
                   value={selectedType}
                   onChange={(e) => setSelectedType(e.target.value as any)}
-                  className="px-4 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-100"
                 >
                   <option value="all">All Types</option>
                   <option value="campus">Campus Counselors</option>
@@ -353,7 +359,7 @@ export default function ProfessionalSupportPage() {
               <select
                 value={selectedSpecialization}
                 onChange={(e) => setSelectedSpecialization(e.target.value)}
-                className="px-4 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-100"
               >
                 <option value="all">All Specializations</option>
                 {specializations.slice(1).map(spec => (
@@ -375,7 +381,7 @@ export default function ProfessionalSupportPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-lg transition-all duration-200"
+                  className="bg-gray-800 rounded-xl border border-gray-700 p-6 hover:border-gray-600 transition-all duration-200"
                 >
                   <div className="flex items-start space-x-4 mb-4">
                     <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center">
@@ -384,16 +390,16 @@ export default function ProfessionalSupportPage() {
                     
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-2">
-                        <h3 className="font-semibold text-slate-800">{therapist.name}</h3>
+                        <h3 className="font-semibold text-gray-100">{therapist.name}</h3>
                         <div className={`flex items-center space-x-1 px-2 py-1 rounded-full text-xs font-medium ${getTypeColor(therapist.type)}`}>
                           {getTypeIcon(therapist.type)}
                           <span className="capitalize">{therapist.type}</span>
                         </div>
                       </div>
                       
-                      <p className="text-slate-600 text-sm mb-2">{therapist.title}</p>
+                      <p className="text-gray-400 text-sm mb-2">{therapist.title}</p>
                       
-                      <div className="flex items-center space-x-4 mb-3 text-xs text-slate-500">
+                      <div className="flex items-center space-x-4 mb-3 text-xs text-gray-500">
                         <div className="flex items-center space-x-1">
                           <Star size={12} className="fill-yellow-400 text-yellow-400" />
                           <span>{therapist.rating}</span>
@@ -410,11 +416,11 @@ export default function ProfessionalSupportPage() {
                     </div>
                   </div>
                   
-                  <p className="text-slate-600 text-sm mb-4">{therapist.description}</p>
+                  <p className="text-gray-400 text-sm mb-4">{therapist.description}</p>
                   
                   <div className="flex flex-wrap gap-1 mb-4">
                     {therapist.specialization.map(spec => (
-                      <span key={spec} className="px-2 py-1 bg-slate-100 text-slate-600 rounded-full text-xs">
+                      <span key={spec} className="px-2 py-1 bg-gray-700 text-gray-300 rounded-full text-xs">
                         {spec}
                       </span>
                     ))}
@@ -449,9 +455,9 @@ export default function ProfessionalSupportPage() {
                   </div>
                   
                   {therapist.pricing && (
-                    <div className="mt-4 pt-4 border-t border-slate-200">
-                      <p className="text-xs text-slate-500 mb-2">Session Pricing:</p>
-                      <div className="flex justify-between text-xs">
+                    <div className="mt-4 pt-4 border-t border-gray-700">
+                      <p className="text-xs text-gray-400 mb-2">Session Pricing:</p>
+                      <div className="flex justify-between text-xs text-gray-300">
                         {therapist.contactMethods.chat && <span>Chat: ₹{therapist.pricing.chat}</span>}
                         {therapist.contactMethods.call && <span>Call: ₹{therapist.pricing.call}</span>}
                         {therapist.contactMethods.video && <span>Video: ₹{therapist.pricing.video}</span>}
@@ -465,8 +471,8 @@ export default function ProfessionalSupportPage() {
             {filteredTherapists.length === 0 && (
               <div className="text-center py-12">
                 <div className="text-6xl mb-4">🔍</div>
-                <h3 className="text-xl font-semibold text-slate-800 mb-2">No therapists found</h3>
-                <p className="text-slate-600">Try adjusting your search or filter criteria</p>
+                <h3 className="text-xl font-semibold text-gray-100 mb-2">No therapists found</h3>
+                <p className="text-gray-400">Try adjusting your search or filter criteria</p>
               </div>
             )}
           </div>

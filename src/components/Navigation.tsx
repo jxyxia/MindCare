@@ -14,8 +14,6 @@ import {
   User,
   Settings,
   LogOut,
-  Sun,
-  Moon,
   Stethoscope
 } from 'lucide-react';
 import { useApp } from '../contexts/AppContext';
@@ -44,9 +42,6 @@ export default function Navigation() {
     navigate('/login');
   };
 
-  const toggleDarkMode = () => {
-    dispatch({ type: 'TOGGLE_DARK_MODE' });
-  };
   return (
     <nav className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-slate-200 z-50 dark:bg-slate-900/95 dark:border-slate-700">
       <div className="w-[95%] max-w-none mx-auto px-4 sm:px-6 lg:px-8">
@@ -97,19 +92,6 @@ export default function Navigation() {
 
           {/* User Profile & Controls */}
           <div className="hidden md:flex items-center space-x-4">
-            {/* Dark Mode Toggle */}
-            <button
-              onClick={toggleDarkMode}
-              className="p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
-              title={state.darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-            >
-              {state.darkMode ? (
-                <Sun size={20} className="text-slate-600 dark:text-slate-300" />
-              ) : (
-                <Moon size={20} className="text-slate-600 dark:text-slate-300" />
-              )}
-            </button>
-
             {/* Profile Dropdown */}
             <div className="relative">
               <button
@@ -211,19 +193,6 @@ export default function Navigation() {
             })}
             
             <div className="border-t border-slate-200 dark:border-slate-700 mt-4 pt-4 mx-2">
-              <button
-                onClick={toggleDarkMode}
-                className="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors w-full text-left mb-3"
-              >
-                {state.darkMode ? (
-                  <Sun size={20} className="text-slate-500 dark:text-slate-400" />
-                ) : (
-                  <Moon size={20} className="text-slate-500 dark:text-slate-400" />
-                )}
-                <span className="font-medium text-slate-700 dark:text-slate-300">
-                  {state.darkMode ? 'Light Mode' : 'Dark Mode'}
-                </span>
-              </button>
               
               <div className="flex items-center justify-between px-2 py-2 mb-3">
                 <div className="flex items-center space-x-3">

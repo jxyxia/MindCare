@@ -1,12 +1,20 @@
+export interface BaseResponse {
+  success: boolean;
+  message?: string;
+}
+
 export interface User {
   id: string;
   name: string;
   email: string;
-  avatar?: string;
-  joinDate: Date;
-  streakDays: number;
-  sessionsCompleted: number;
-  currentMood?: MoodLevel;
+  role: 'user' | 'admin';
+  settings?: UserSettings;
+}
+
+export interface UserSettings {
+  notifications: boolean;
+  theme: 'dark';
+  language: string;
 }
 
 export interface MoodEntry {

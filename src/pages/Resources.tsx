@@ -80,10 +80,10 @@ const typeIcons = {
 };
 
 const typeColors = {
-  article: 'bg-blue-100 text-blue-800',
-  video: 'bg-red-100 text-red-800',
-  guide: 'bg-emerald-100 text-emerald-800',
-  assessment: 'bg-purple-100 text-purple-800',
+  article: 'bg-blue-900 text-blue-100',
+  video: 'bg-red-900 text-red-100',
+  guide: 'bg-emerald-900 text-emerald-100',
+  assessment: 'bg-purple-900 text-purple-100',
 };
 
 export default function Resources() {
@@ -113,15 +113,15 @@ export default function Resources() {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-purple-50 pt-20 pb-8">
+    <div className="min-h-screen bg-gray-900 pt-20 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="mb-8"
         >
-          <h1 className="text-3xl font-bold text-slate-800 mb-2">Mental Health Resources</h1>
-          <p className="text-slate-600">
+          <h1 className="text-3xl font-bold text-gray-100 mb-2">Mental Health Resources</h1>
+          <p className="text-gray-400">
             Explore our comprehensive library of articles, videos, guides, and assessments
           </p>
         </motion.div>
@@ -136,7 +136,7 @@ export default function Resources() {
                 placeholder="Search resources..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="w-full pl-10 pr-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-100"
               />
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -145,7 +145,7 @@ export default function Resources() {
                 <select
                   value={selectedType}
                   onChange={(e) => setSelectedType(e.target.value)}
-                  className="px-4 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-100"
                 >
                   <option value="all">All Types</option>
                   <option value="article">Articles</option>
@@ -157,7 +157,7 @@ export default function Resources() {
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="px-4 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-100"
               >
                 <option value="all">All Categories</option>
                 {categories.slice(1).map(category => (
@@ -187,7 +187,7 @@ export default function Resources() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-lg transition-all duration-200"
+                className="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden hover:border-gray-600 transition-all duration-200"
               >
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-4">
@@ -206,8 +206,8 @@ export default function Resources() {
                     )}
                   </div>
 
-                  <h3 className="text-lg font-semibold text-slate-800 mb-2">{resource.title}</h3>
-                  <p className="text-sm text-slate-600 mb-3">{resource.content}</p>
+                  <h3 className="text-lg font-semibold text-gray-100 mb-2">{resource.title}</h3>
+                  <p className="text-sm text-gray-400 mb-3">{resource.content}</p>
                   
                   <div className="text-xs text-purple-600 font-medium mb-4">{resource.category}</div>
 

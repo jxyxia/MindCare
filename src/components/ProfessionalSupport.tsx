@@ -200,145 +200,70 @@ export default function ProfessionalSupport() {
   ).slice(0, 3);
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-xl font-semibold text-slate-800">Professional Support</h2>
-          <p className="text-slate-600 text-sm">Connect with qualified therapists and counselors</p>
-        </div>
-        <div className="flex items-center space-x-2">
-          <select
-            value={selectedType}
-            onChange={(e) => setSelectedType(e.target.value as any)}
-            className="px-3 py-2 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+    <div className="bg-gray-800 rounded-xl border border-gray-700 p-6">
+      <h2 className="text-xl font-semibold text-gray-100 mb-4">Professional Support</h2>
+      
+      {/* Available Professionals */}
+      <div className="space-y-4">
+        {mockTherapists.map((professional) => (
+          <div
+            key={professional.id}
+            className="flex items-center space-x-4 p-4 bg-gray-700 rounded-lg border border-gray-600"
           >
-            <option value="all">All Types</option>
-            <option value="campus">Campus Counselors</option>
-            <option value="partner">Partner Therapists</option>
-            <option value="online">Online Specialists</option>
-          </select>
-        </div>
-      </div>
-
-      {/* Upcoming Sessions */}
-      {upcomingSessions.length > 0 && (
-        <div className="bg-blue-50 rounded-xl p-4 border border-blue-200">
-          <h3 className="font-semibold text-blue-800 mb-3 flex items-center">
-            <Calendar className="mr-2" size={16} />
-            Upcoming Sessions
-          </h3>
-          <div className="space-y-2">
-            {upcomingSessions.map(session => {
-              const therapist = mockTherapists.find(t => t.id === session.therapistId);
-              return (
-                <div key={session.id} className="flex items-center justify-between bg-white rounded-lg p-3">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-                      <User size={16} className="text-white" />
-                    </div>
-                    <div>
-                      <p className="font-medium text-slate-800 text-sm">{therapist?.name}</p>
-                      <p className="text-slate-600 text-xs">
-                        {session.scheduledDate.toLocaleDateString()} at {session.scheduledDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    {session.type === 'chat' && <MessageSquare size={16} className="text-blue-600" />}
-                    {session.type === 'call' && <Phone size={16} className="text-emerald-600" />}
-                    {session.type === 'video' && <Video size={16} className="text-purple-600" />}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
-
-      {/* Therapists Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {filteredTherapists.map((therapist, index) => (
-          <motion.div
-            key={therapist.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-            className="bg-white rounded-xl border border-slate-200 p-4 hover:shadow-md transition-all duration-200"
-          >
-            <div className="flex items-start space-x-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center">
-                <User className="text-white" size={20} />
-              </div>
+            <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center">
+              <User className="text-white" size={24} />
+            </div>
+            
+            <div className="flex-1">
+              <h3 className="font-medium text-gray-100">{professional.name}</h3>
+              <p className="text-sm text-gray-400">{professional.title}</p>
               
-              <div className="flex-1">
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="font-semibold text-slate-800">{therapist.name}</h3>
-                  <div className={`flex items-center space-x-1 px-2 py-1 rounded-full text-xs font-medium ${getTypeColor(therapist.type)}`}>
-                    {getTypeIcon(therapist.type)}
-                    <span className="capitalize">{therapist.type}</span>
-                  </div>
+              <div className="flex items-center space-x-4 mt-2">
+                <div className="flex items-center space-x-1 text-yellow-400 text-xs">
+                  <Star size={12} className="fill-yellow-400" />
+                  <span>{professional.rating}</span>
                 </div>
-                
-                <p className="text-slate-600 text-sm mb-2">{therapist.title}</p>
-                
-                <div className="flex items-center space-x-4 mb-3 text-xs text-slate-500">
-                  <div className="flex items-center space-x-1">
-                    <Star size={12} className="fill-yellow-400 text-yellow-400" />
-                    <span>{therapist.rating}</span>
-                  </div>
-                  <div className="flex items-center space-x-1">
-                    <Award size={12} />
-                    <span>{therapist.experience}+ years</span>
-                  </div>
-                  <div className={`flex items-center space-x-1 ${therapist.isOnline ? 'text-emerald-600' : 'text-slate-400'}`}>
-                    <div className={`w-2 h-2 rounded-full ${therapist.isOnline ? 'bg-emerald-500' : 'bg-slate-400'}`} />
-                    <span>{therapist.isOnline ? 'Online' : 'Offline'}</span>
-                  </div>
+                <div className="flex items-center space-x-1 text-slate-400 text-xs">
+                  <Award size={12} />
+                  <span>{professional.experience}+ years</span>
                 </div>
-                
-                <div className="flex flex-wrap gap-1 mb-3">
-                  {therapist.specialization.slice(0, 3).map(spec => (
-                    <span key={spec} className="px-2 py-1 bg-slate-100 text-slate-600 rounded-full text-xs">
-                      {spec}
-                    </span>
-                  ))}
-                </div>
-                
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    {therapist.contactMethods.chat && (
-                      <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
-                        <MessageSquare size={12} className="text-blue-600" />
-                      </div>
-                    )}
-                    {therapist.contactMethods.call && (
-                      <div className="w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center">
-                        <Phone size={12} className="text-emerald-600" />
-                      </div>
-                    )}
-                    {therapist.contactMethods.video && (
-                      <div className="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center">
-                        <Video size={12} className="text-purple-600" />
-                      </div>
-                    )}
-                  </div>
-                  
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={() => {
-                      setSelectedTherapist(therapist);
-                      setShowBookingModal(true);
-                    }}
-                    className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium"
-                  >
-                    Book Session
-                  </motion.button>
+                <div className={`flex items-center space-x-1 ${professional.isOnline ? 'text-emerald-400' : 'text-slate-500'}`}>
+                  <div className={`w-2 h-2 rounded-full ${professional.isOnline ? 'bg-emerald-500' : 'bg-slate-400'}`} />
+                  <span className="text-xs">{professional.isOnline ? 'Online' : 'Offline'}</span>
                 </div>
               </div>
             </div>
-          </motion.div>
+            
+            <div className="flex items-center space-x-2">
+              {professional.contactMethods.chat && (
+                <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
+                  <MessageSquare size={12} className="text-blue-600" />
+                </div>
+              )}
+              {professional.contactMethods.call && (
+                <div className="w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center">
+                  <Phone size={12} className="text-emerald-600" />
+                </div>
+              )}
+              {professional.contactMethods.video && (
+                <div className="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center">
+                  <Video size={12} className="text-purple-600" />
+                </div>
+              )}
+              
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => {
+                  setSelectedTherapist(professional);
+                  setShowBookingModal(true);
+                }}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
+              >
+                Connect
+              </motion.button>
+            </div>
+          </div>
         ))}
       </div>
 

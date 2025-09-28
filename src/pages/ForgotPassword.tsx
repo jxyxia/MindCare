@@ -98,59 +98,59 @@ export default function ForgotPassword() {
   }
 
   return (
-    <AuthLayout
-      title="Reset Your Password"
-      subtitle="Enter your email to receive reset instructions"
-    >
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        {/* Back to Login Link */}
-        <Link
-          to="/login"
-          className="inline-flex items-center space-x-2 text-sm text-blue-600 hover:text-blue-700 font-medium"
+    <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="max-w-md w-full space-y-8 bg-gray-800 p-8 rounded-xl border border-gray-700"
+      >
+        <div className="flex flex-col items-center">
+          <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center mb-4">
+            <Brain className="text-white" size={24} />
+          </div>
+          <h2 className="text-3xl font-bold text-gray-100">Reset Password</h2>
+          <p className="mt-2 text-gray-400">
+            Enter your email to receive reset instructions
+          </p>
+        </div>
+
+        <form
+          className="mt-8 space-y-6"
+          onSubmit={handleSubmit(onSubmit)}
         >
-          <ArrowLeft size={16} />
-          <span>Back to Sign In</span>
-        </Link>
-
-        {/* Error Message */}
-        {error && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="flex items-center space-x-2 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700"
-          >
-            <AlertCircle size={16} />
-            <span className="text-sm">{error}</span>
-          </motion.div>
-        )}
-
-        {/* Email Field */}
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2">
-            Email Address
-          </label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Mail className="h-5 w-5 text-slate-400" />
-            </div>
+          <div>
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-300"
+            >
+              Email
+            </label>
             <input
               {...register('email')}
               type="email"
               id="email"
-              className={`block w-full pl-10 pr-3 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
+              className={`mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
                 errors.email
                   ? 'border-red-300 bg-red-50'
                   : watchedEmail && !errors.email
                   ? 'border-emerald-300 bg-emerald-50'
                   : 'border-slate-300'
               }`}
-              placeholder="Enter your email address"
+              placeholder="Enter your email"
             />
             {watchedEmail && !errors.email && (
               <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
                 <div className="w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center">
-                  <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  <svg
+                    className="w-3 h-3 text-white"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                 </div>
               </div>
@@ -165,35 +165,31 @@ export default function ForgotPassword() {
               {errors.email.message}
             </motion.p>
           )}
-        </div>
 
-        {/* Submit Button */}
-        <motion.button
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          type="submit"
-          disabled={!isValid || isLoading}
-          className="w-full flex items-center justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
-        >
-          {isLoading ? (
-            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-          ) : (
-            'Send Reset Instructions'
-          )}
-        </motion.button>
+          <div>
+            <button
+              type="submit"
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            >
+              {isLoading ? (
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+              ) : (
+                'Send Reset Instructions'
+              )}
+            </button>
+          </div>
 
-        <div className="text-center">
-          <p className="text-sm text-slate-600">
+          <p className="text-center text-sm text-gray-400">
             Remember your password?{' '}
             <Link
               to="/login"
-              className="font-medium text-blue-600 hover:text-blue-700"
+              className="font-medium text-blue-400 hover:text-blue-300"
             >
-              Sign in instead
+              Back to login
             </Link>
           </p>
-        </div>
-      </form>
-    </AuthLayout>
+        </form>
+      </motion.div>
+    </div>
   );
 }
